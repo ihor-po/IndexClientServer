@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace client_part
 {
-    public partial class Form1 : Form
+    public partial class client_main : Form
     {
-        public Form1()
+        public client_main()
         {
             InitializeComponent();
+            this.Load += Client_main_Load;
+        }
+
+        private void Client_main_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

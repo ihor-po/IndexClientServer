@@ -1,3 +1,5 @@
 .vs/
 server_une/bin/
 server_une/obj/
+client_part/bin/
+client_part/obj/
