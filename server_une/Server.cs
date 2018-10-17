@@ -37,6 +37,8 @@ namespace server_une
             socket.Bind(ep);        //Связать полученный сокет с IP адресом и портом на сервере
             socket.Listen(10);      //перевод сокета в  состояние прослушивания с очередью подключения 10
 
+            Console.WriteLine(DateTime.Now.ToString() + " >>> server was started" );
+
             DelegateNetwork dn = new DelegateNetwork(ReciveMode);
             dn.BeginInvoke(socket, null, null);
         }
@@ -46,6 +48,7 @@ namespace server_une
         /// </summary>
         public void ServerStop()
         {
+            Console.WriteLine(DateTime.Now.ToString() + " >>> server was stoped");
             CloseConnection(socket);
         }
 
@@ -68,6 +71,7 @@ namespace server_une
 
                     //Вывод в консоль данные о подключенном клиенте
                     IPEndPoint remoteIpEndPoint = tmpSocket.RemoteEndPoint as IPEndPoint;
+                    Console.WriteLine(DateTime.Now.ToString());
                     if (remoteIpEndPoint != null)
                     {
                         Console.WriteLine("Connection from " + remoteIpEndPoint.Address + ":" + remoteIpEndPoint.Port);

@@ -16,7 +16,7 @@ namespace server_une
             Server ser = new Server("192.168.88.217", 12088);
 
             ser.ServerStart();
-            Console.ReadKey();
+            Console.ReadLine();
             ser.ServerStop();
             
         }
