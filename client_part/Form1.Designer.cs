@@ -45,7 +45,7 @@
             this.cm_tb_ip.Name = "cm_tb_ip";
             this.cm_tb_ip.Size = new System.Drawing.Size(126, 26);
             this.cm_tb_ip.TabIndex = 0;
-            this.cm_tb_ip.Text = "192.168.88.217";
+            this.cm_tb_ip.Text = "178.213.0.182";
             // 
             // label1
             // 
@@ -113,6 +113,7 @@
             this.cm_tb_result.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.cm_tb_result.Size = new System.Drawing.Size(800, 294);
             this.cm_tb_result.TabIndex = 7;
+            this.cm_tb_result.Text = "Данные сервера можно оставить - он работает и данные отдает %)";
             // 
             // client_main
             // 

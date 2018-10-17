@@ -67,7 +67,7 @@ namespace server_une
                     byte[] buffer = new byte[1024];
                     l = tmpSocket.Receive(buffer);
 
-                    index = Encoding.ASCII.GetString(buffer, 0, l); //получение индекса от клиента
+                    index = Encoding.Unicode.GetString(buffer, 0, l); //получение индекса от клиента
 
                     //Вывод в консоль данные о подключенном клиенте
                     IPEndPoint remoteIpEndPoint = tmpSocket.RemoteEndPoint as IPEndPoint;
@@ -79,7 +79,7 @@ namespace server_une
                     }
                     else
                     {
-                        Console.WriteLine(tmpSocket.RemoteEndPoint.ToString() + ">>>" + index);
+                        Console.WriteLine(tmpSocket.RemoteEndPoint.ToString() + " >>> " + index);
                     }
 
                     DelegateConnect dc = new DelegateConnect(SendMode);
@@ -95,7 +95,7 @@ namespace server_une
         private void SendMode(Socket _socket)
         {
             string result = GetStreetsByIndex(index);
-            _socket.Send(Encoding.ASCII.GetBytes(result));
+            _socket.Send(Encoding.Unicode.GetBytes(result));
             CloseConnection(_socket);
         }
 
@@ -114,7 +114,7 @@ namespace server_une
                 {
                     var streets = data.Address.Where(item => item.PostIndex.PostI == _index);
 
-                    if (streets != null)
+                    if (streets.Count() > 0)
                     {
 
                         foreach (Address item in streets)
@@ -124,13 +124,13 @@ namespace server_une
                     }
                     else
                     {
-                        res.Append("По заданному индексу улицы не найдены!");
+                        res.AppendLine("По заданному индексу улицы не найдены!");
                     }
                 }
             }
             catch (Exception ex)
             {
-                res.Append(ex.Message);
+                res.AppendLine(ex.Message);
             }
 
             return res.ToString();
