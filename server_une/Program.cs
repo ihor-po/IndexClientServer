@@ -10,14 +10,13 @@ namespace server_une
 {
     class Program
     {
-        static IPAddress ip;
-        static IPEndPoint ep;
+
 
 
         static void Main(string[] args)
         {
-            ip = IPAddress.Parse("192.168.88.217");
-            ep = new IPEndPoint(ip, 12088);
+            //ip = IPAddress.Parse("192.168.88.217");
+            //ep = new IPEndPoint(ip, 12088);
             Server();
         }
 
@@ -27,14 +26,14 @@ namespace server_une
 
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
 
-            socket.Bind(ep);
-            socket.Listen(10); //перевод сокета в  состояние прослушивания с очередью подключения 10
+            //socket.Bind(ep);
+            //socket.Listen(10); //перевод сокета в  состояние прослушивания с очередью подключения 10
 
             try
             {
                 while (true)
                 {
-                    Socket tmpSocket = socket.Accept();
+                    
                     tmpSocket.Send(System.Text.Encoding.ASCII.GetBytes("Connection success...\r\n"));
                     Console.WriteLine(tmpSocket.RemoteEndPoint.ToString());
                     string res = GetStreetsByIndex("50000");
@@ -53,10 +52,6 @@ namespace server_une
             }
         }
 
-        private void StartServer()
-        {
-            if
-        }
 
         #region CLIENT
         static void Client()
