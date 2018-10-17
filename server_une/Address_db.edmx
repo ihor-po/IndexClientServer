@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Address_db.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Address_dbStoreContainer">
+    <EntitySet Name="PostIndex" EntityType="Address_db.Store.PostIndex" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Address" EntityType="Address_db.Store.Address" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AddressPostIndex" Association="Address_db.Store.AddressPostIndex">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="PostIndex" EntitySet="PostIndex" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PostIndex">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostI" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocalAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostIndexId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AddressPostIndex">
+    <End Role="Address" Type="Address_db.Store.Address" Multiplicity="*" />
+    <End Role="PostIndex" Type="Address_db.Store.PostIndex" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PostIndex">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="PostIndexId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Address_db" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Address_dbContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PostIndex" EntityType="Address_db.PostIndex" />
+          <EntitySet Name="Address" EntityType="Address_db.Address" />
+          <AssociationSet Name="AddressPostIndex" Association="Address_db.AddressPostIndex">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="PostIndex" EntitySet="PostIndex" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PostIndex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostI" Type="String" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Address_db.AddressPostIndex" FromRole="PostIndex" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocalAddress" Type="String" Nullable="false" />
+          <NavigationProperty Name="PostIndex" Relationship="Address_db.AddressPostIndex" FromRole="Address" ToRole="PostIndex" />
+          <Property Name="PostIndexId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AddressPostIndex">
+          <End Type="Address_db.Address" Role="Address" Multiplicity="*" >
+          </End>
+          <End Type="Address_db.PostIndex" Role="PostIndex" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="PostIndex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="PostIndexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Address_dbStoreContainer" CdmEntityContainer="Address_dbContainer">
+    <EntitySetMapping Name="PostIndex">
+      <EntityTypeMapping TypeName="IsTypeOf(Address_db.PostIndex)">
+        <MappingFragment StoreEntitySet="PostIndex">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PostI" ColumnName="PostI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Address">
+      <EntityTypeMapping TypeName="IsTypeOf(Address_db.Address)">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LocalAddress" ColumnName="LocalAddress" />
+          <ScalarProperty Name="PostIndexId" ColumnName="PostIndexId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
